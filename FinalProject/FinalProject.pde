@@ -23,10 +23,14 @@ void setup() {
   println("segmentLength: " + segmentLength);
 
   englishClip = new SoundFile(this, "hello.mp3");
+  //englishClip.play();
 }
 
 
 void draw() {
+  if (greetingIndex == 1) {
+    englishClip.play();
+  }
 
   background(0);
   translate(width/2, height/2); // Translate the loaded outlined text to a specific position
@@ -41,14 +45,14 @@ void draw() {
 
       float circWidth = 5;
 
-      if (i % 1 == 0) {
+      if (i % 1 == 0) { 
 
         if (greetingIndex == 0) {
           fill(0, 0, 240);
         }
         if (greetingIndex == 1) {
           fill(133, 33, 240);
-          englishClip.play();
+          //englishClip.play();
         }
         if (greetingIndex == 2) {
           fill(0, 0, 240);
@@ -68,13 +72,10 @@ void draw() {
         ellipse(wordPoints[i].x, wordPoints[i].y, circWidth, circWidth);
       }
     }
-
-    /*if (greetingIndex == 1){
-     englishClip.play();
-     } */
   }
 }
 
+// This mouseClicked function cycles the words in the greeting array
 void mouseClicked() {
   if (greetingIndex < 4) {
     greetingIndex ++;
