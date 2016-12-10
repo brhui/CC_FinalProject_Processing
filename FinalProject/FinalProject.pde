@@ -5,9 +5,15 @@ RFont font;
 String[] greeting = {"Hello", "Bonjour", "Hola", "Buon Giorno", "Guten Tag"};
 int greetingIndex = 0;
 
+// SoundFile variables
 SoundFile englishClip;
+/*
+SoundFile frenchClip;
+ SoundFile spanishClip;
+ SoundFile italianClip;
+ SoundFile germanClip; */
 
-float segmentLength = random(1, 5);
+float segmentLength = random(1, 6);
 
 void setup() {
   size(1200, 600);  
@@ -23,27 +29,33 @@ void setup() {
   println("segmentLength: " + segmentLength);
 
   englishClip = new SoundFile(this, "hello.mp3");
+  /*
+  frenchClip = new SoundFile(this, "bonjour.mp3");
+   spanishClip = new SoundFile(this,
+   */
   //englishClip.play();
 }
 
 
 void draw() {
-  if (greetingIndex == 1) {
-    englishClip.play();
+  if (keyPressed == true) {
+    background(0);
+  } else {
+    background(255);
   }
 
-  background(0);
   translate(width/2, height/2); // Translate the loaded outlined text to a specific position
 
   if (greetingIndex < 5) {
-    RGroup greetingGroup;
-    greetingGroup = font.toGroup(greeting[greetingIndex]);
-    greetingGroup = greetingGroup.toPolygonGroup();
-    RPoint[] wordPoints = greetingGroup.getPoints();
+    RGroup greetingGroup; // Creates new RGroup to hold objects in it
+    greetingGroup = font.toGroup(greeting[greetingIndex]); // RGroup will hold font and bring the words in the greeting array into the group
+    greetingGroup = greetingGroup.toPolygonGroup(); // Polygons are creatted from greetingGroup
+    RPoint[] wordPoints = greetingGroup.getPoints(); // Returns the points of the groups as an array
 
     for (int i = 0; i < wordPoints.length; i++ ) {
 
-      float circWidth = 5;
+      float circWidth = random(1, 5);
+      float circWidth2 = random(1, 5);
 
       if (i % 1 == 0) { 
 
@@ -55,21 +67,38 @@ void draw() {
           //englishClip.play();
         }
         if (greetingIndex == 2) {
-          fill(0, 0, 240);
+          fill(0, 255, 240);
         }
         if (greetingIndex == 3) {
-          fill(0, 0, 240);
+          fill(55, 24, 24);
         }
         if (greetingIndex == 4) {
-          fill(0, 0, 240);
+          fill(13, 51, 123);
         }
 
         ellipse(wordPoints[i].x, wordPoints[i].y, circWidth, circWidth);
       }
 
       if (i % 2 ==0) {
-        fill(255, 0, 0);
-        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth, circWidth);
+
+        if (greetingIndex == 0) {
+          fill(12, 224, 123);
+        }
+        if (greetingIndex == 1) {
+          fill(123, 233, 140);
+          //englishClip.play();
+        }
+        if (greetingIndex == 2) {
+          fill(212, 55, 90);
+        }
+        if (greetingIndex == 3) {
+          fill(102, 224, 124);
+        }
+        if (greetingIndex == 4) {
+          fill(143, 51, 23);
+        }
+
+        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth2, circWidth2);
       }
     }
   }
@@ -82,4 +111,20 @@ void mouseClicked() {
   } else {
     greetingIndex = 0;
   }
+
+  if (greetingIndex == 0) {
+    englishClip.play();
+  }
+
+  if (greetingIndex >= 5) {
+    greetingIndex = 1;
+  }
 }
+
+/*void keyPressed() {
+ if (key == 'a' || key == 'A'){
+ background(0);
+ } else {
+ background(255);
+ }
+ } */
