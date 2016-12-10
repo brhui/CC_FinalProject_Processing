@@ -31,9 +31,10 @@ void setup() {
   englishClip = new SoundFile(this, "hello.mp3");
   /*
   frenchClip = new SoundFile(this, "bonjour.mp3");
-   spanishClip = new SoundFile(this,
+  spanishClip = new SoundFile(this, "hola.mp3");
+  italianClip = new SoundFile(this, "buongiorno.mp3");
+  germanClip = new SoundFile(this, "gutentag.mp3");
    */
-  //englishClip.play();
 }
 
 
