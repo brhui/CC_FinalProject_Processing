@@ -11,7 +11,7 @@ SoundFile englishClip;
 SoundFile frenchClip;
  SoundFile spanishClip;
  SoundFile italianClip;
- SoundFile germanClip; */
+ SSoundFile germanClip; */
 
 float segmentLength = random(1, 6);
 
@@ -31,9 +31,9 @@ void setup() {
   englishClip = new SoundFile(this, "hello.mp3");
   /*
   frenchClip = new SoundFile(this, "bonjour.mp3");
-  spanishClip = new SoundFile(this, "hola.mp3");
-  italianClip = new SoundFile(this, "buongiorno.mp3");
-  germanClip = new SoundFile(this, "gutentag.mp3");
+   spanishClip = new SoundFile(this, "hola.mp3");
+   italianClip = new SoundFile(this, "buongiorno.mp3");
+   germanClip = new SoundFile(this, "gutentag.mp3");
    */
 }
 
@@ -55,51 +55,71 @@ void draw() {
 
     for (int i = 0; i < wordPoints.length; i++ ) {
 
-      float circWidth = random(1, 5);
+      float circWidth1 = random(1, 5);
       float circWidth2 = random(1, 5);
+      float circWidth3 = random(1, 5);
 
       if (i % 1 == 0) { 
 
-        if (greetingIndex == 0) {
-          fill(0, 0, 240);
+        if (greetingIndex == 0) { // Canada
+          fill(255, 0, 0);
         }
-        if (greetingIndex == 1) {
-          fill(133, 33, 240);
-          //englishClip.play();
+        if (greetingIndex == 1) { // France
+          fill(0, 35, 149); // Blue
         }
-        if (greetingIndex == 2) {
-          fill(0, 255, 240);
+        if (greetingIndex == 2) { // Spain
+          fill(198, 11, 30); // Red
         }
-        if (greetingIndex == 3) {
-          fill(55, 24, 24);
+        if (greetingIndex == 3) { // Italy
+          fill(0, 146, 70); // Green
         }
-        if (greetingIndex == 4) {
-          fill(13, 51, 123);
+        if (greetingIndex == 4) { // Germany
+          fill(0); // Black
         }
 
-        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth, circWidth);
+        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
       }
 
       if (i % 2 ==0) {
 
-        if (greetingIndex == 0) {
-          fill(12, 224, 123);
+        if (greetingIndex == 0) { // Canada
+          fill(255); // White
         }
-        if (greetingIndex == 1) {
-          fill(123, 233, 140);
-          //englishClip.play();
+        if (greetingIndex == 1) { // France
+          fill(255); // White
         }
-        if (greetingIndex == 2) {
-          fill(212, 55, 90);
+        if (greetingIndex == 2) { // Spain
+          fill(255, 196, 0); // Yellow
         }
-        if (greetingIndex == 3) {
-          fill(102, 224, 124);
+        if (greetingIndex == 3) { // Italy
+          fill(255); // White
         }
-        if (greetingIndex == 4) {
-          fill(143, 51, 23);
+        if (greetingIndex == 4) { // Germany
+          fill(221, 0, 0); // Red
         }
 
         ellipse(wordPoints[i].x, wordPoints[i].y, circWidth2, circWidth2);
+      }
+
+      if (i % 3 == 0) { 
+
+        if (greetingIndex == 0) { // Canada
+          fill(255, 0, 0);
+        }
+        if (greetingIndex == 1) { // France
+          fill(237, 41, 57); // Red
+        }
+        if (greetingIndex == 2) { // Spain
+          fill(198, 11, 30); // Red
+        }
+        if (greetingIndex == 3) { // Italy
+          fill(206, 43, 55); // Red
+        }
+        if (greetingIndex == 4) { // Germany
+          fill(255, 206, 0); // Yellow
+        }
+
+        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
       }
     }
   }
@@ -113,6 +133,7 @@ void mouseClicked() {
     greetingIndex = 0;
   }
 
+  // This
   if (greetingIndex == 0) {
     englishClip.play();
   }
