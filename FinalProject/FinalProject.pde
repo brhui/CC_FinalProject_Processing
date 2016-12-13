@@ -3,7 +3,9 @@ import processing.sound.*; // Importing the Processing Sound Library
 
 RFont font;
 String[] greeting = {"Hello", "Bonjour", "Hola", "Buon Giorno", "Guten Tag"};
-int greetingIndex = 0;
+String[] food = {"Poutine", "Ratatouille", "Paella", "Bruschetta", "Spätzle"};
+String[] country = {"Canada", "France", "Spain", "Italy", "Germany"};
+int arrayIndex = 0;
 
 // SoundFile variables
 SoundFile englishClip;
@@ -19,6 +21,8 @@ void setup() {
   size(1200, 600);  
 
   noStroke();
+
+  rectMode(CENTER);
 
   RG.init(this); // Initilizes the Geomerative Library
   font = new RFont("data/OpenSans-Bold.ttf", 100, RFont.CENTER); // Loads the font using the Geomerative Library, font size 100, center aligned.
@@ -47,79 +51,162 @@ void draw() {
 
   translate(width/2, height/2); // Translate the loaded outlined text to a specific position
 
-  if (greetingIndex < 5) {
-    RGroup greetingGroup; // Creates new RGroup to hold objects in it
-    greetingGroup = font.toGroup(greeting[greetingIndex]); // RGroup will hold font and bring the words in the greeting array into the group
-    greetingGroup = greetingGroup.toPolygonGroup(); // Polygons are creatted from greetingGroup
-    RPoint[] wordPoints = greetingGroup.getPoints(); // Returns the points of the groups as an array
+  if (arrayIndex < 5) {
 
-    for (int i = 0; i < wordPoints.length; i++ ) {
+    // FOOD --------------------------------------------------------------------------
 
-      float circWidth1 = random(1, 5);
-      float circWidth2 = random(1, 5);
-      float circWidth3 = random(1, 5);
+    if (key == 'a' || key == 'A') {
 
-      if (i % 1 == 0) { 
+      RGroup foodGroup; // Creates new RGroup to hold objects in it
+      foodGroup = font.toGroup(food[arrayIndex]); // RGroup will hold font and bring the words in the greeting array into the group
+      foodGroup = foodGroup.toPolygonGroup(); // Polygons are creatted from greetingGroup
+      RPoint[] foodPoints = foodGroup.getPoints(); // Returns the points of the groups as an array
 
-        if (greetingIndex == 0) { // Canada
-          fill(255, 0, 0);
-        }
-        if (greetingIndex == 1) { // France
-          fill(0, 35, 149); // Blue
-        }
-        if (greetingIndex == 2) { // Spain
-          fill(198, 11, 30); // Red
-        }
-        if (greetingIndex == 3) { // Italy
-          fill(0, 146, 70); // Green
-        }
-        if (greetingIndex == 4) { // Germany
-          fill(0); // Black
+      for (int i = 0; i < foodPoints.length; i++) {
+        float rectWidth1 = random(1, 5);
+        float rectWidth2 = random(1, 5);
+        float rectWidth3 = random(1, 5);
+
+        if (i % 1 == 0) { 
+
+          if (arrayIndex == 0) { // Canada
+            fill(255, 0, 0); // Red
+          }
+          if (arrayIndex == 1) { // France
+            fill(0, 35, 149); // Blue
+          }
+          if (arrayIndex == 2) { // Spain
+            fill(198, 11, 30); // Red
+          }
+          if (arrayIndex == 3) { // Italy
+            fill(0, 146, 70); // Green
+          }
+          if (arrayIndex == 4) { // Germany
+            fill(0); // Black
+          }
+          rect(foodPoints[i].x, foodPoints[i].y, rectWidth1, rectWidth1);
         }
 
-        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
+        if (i % 2 ==0) {
+
+          if (arrayIndex == 0) { // Canada
+            fill(255); // White
+          }
+          if (arrayIndex == 1) { // France
+            fill(255); // White
+          }
+          if (arrayIndex == 2) { // Spain
+            fill(255, 196, 0); // Yellow
+          }
+          if (arrayIndex == 3) { // Italy
+            fill(255); // White
+          }
+          if (arrayIndex == 4) { // Germany
+            fill(221, 0, 0); // Red
+          }
+
+          rect(foodPoints[i].x, foodPoints[i].y, rectWidth2, rectWidth2);
+        }
+
+        if (i % 3 == 0) { 
+
+          if (arrayIndex == 0) { // Canada
+            fill(255, 0, 0); // Red
+          }
+          if (arrayIndex == 1) { // France
+            fill(237, 41, 57); // Red
+          }
+          if (arrayIndex == 2) { // Spain
+            fill(198, 11, 30); // Red
+          }
+          if (arrayIndex == 3) { // Italy
+            fill(206, 43, 55); // Red
+          }
+          if (arrayIndex == 4) { // Germany
+            fill(255, 206, 0); // Yellow
+          }
+
+          rect(foodPoints[i].x, foodPoints[i].y, rectWidth1, rectWidth1);
+        }
       }
+    } 
 
-      if (i % 2 ==0) {
+    // GREETINGS --------------------------------------------------------------------------
 
-        if (greetingIndex == 0) { // Canada
-          fill(255); // White
-        }
-        if (greetingIndex == 1) { // France
-          fill(255); // White
-        }
-        if (greetingIndex == 2) { // Spain
-          fill(255, 196, 0); // Yellow
-        }
-        if (greetingIndex == 3) { // Italy
-          fill(255); // White
-        }
-        if (greetingIndex == 4) { // Germany
-          fill(221, 0, 0); // Red
-        }
+    else {
+      RGroup greetingGroup; // Creates new RGroup to hold objects in it
+      greetingGroup = font.toGroup(greeting[arrayIndex]); // RGroup will hold font and bring the words in the greeting array into the group
+      greetingGroup = greetingGroup.toPolygonGroup(); // Polygons are creatted from greetingGroup
+      RPoint[] wordPoints = greetingGroup.getPoints(); // Returns the points of the groups as an array
 
-        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth2, circWidth2);
-      }
+      for (int i = 0; i < wordPoints.length; i++ ) {
 
-      if (i % 3 == 0) { 
+        float circWidth1 = random(1, 5);
+        float circWidth2 = random(1, 5);
+        float circWidth3 = random(1, 5);
 
-        if (greetingIndex == 0) { // Canada
-          fill(255, 0, 0);
-        }
-        if (greetingIndex == 1) { // France
-          fill(237, 41, 57); // Red
-        }
-        if (greetingIndex == 2) { // Spain
-          fill(198, 11, 30); // Red
-        }
-        if (greetingIndex == 3) { // Italy
-          fill(206, 43, 55); // Red
-        }
-        if (greetingIndex == 4) { // Germany
-          fill(255, 206, 0); // Yellow
+        if (i % 1 == 0) { 
+
+          if (arrayIndex == 0) { // Canada
+            fill(255, 0, 0); // Red
+          }
+          if (arrayIndex == 1) { // France
+            fill(0, 35, 149); // Blue
+          }
+          if (arrayIndex == 2) { // Spain
+            fill(198, 11, 30); // Red
+          }
+          if (arrayIndex == 3) { // Italy
+            fill(0, 146, 70); // Green
+          }
+          if (arrayIndex == 4) { // Germany
+            fill(0); // Black
+          }
+
+          ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
         }
 
-        ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
+        if (i % 2 ==0) {
+
+          if (arrayIndex == 0) { // Canada
+            fill(255); // White
+          }
+          if (arrayIndex == 1) { // France
+            fill(255); // White
+          }
+          if (arrayIndex == 2) { // Spain
+            fill(255, 196, 0); // Yellow
+          }
+          if (arrayIndex == 3) { // Italy
+            fill(255); // White
+          }
+          if (arrayIndex == 4) { // Germany
+            fill(221, 0, 0); // Red
+          }
+
+          ellipse(wordPoints[i].x, wordPoints[i].y, circWidth2, circWidth2);
+        }
+
+        if (i % 3 == 0) { 
+
+          if (arrayIndex == 0) { // Canada
+            fill(255, 0, 0); // Red
+          }
+          if (arrayIndex == 1) { // France
+            fill(237, 41, 57); // Red
+          }
+          if (arrayIndex == 2) { // Spain
+            fill(198, 11, 30); // Red
+          }
+          if (arrayIndex == 3) { // Italy
+            fill(206, 43, 55); // Red
+          }
+          if (arrayIndex == 4) { // Germany
+            fill(255, 206, 0); // Yellow
+          }
+
+          ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
+        }
       }
     }
   }
@@ -127,19 +214,19 @@ void draw() {
 
 // This mouseClicked function cycles the words in the greeting array
 void mouseClicked() {
-  if (greetingIndex < 4) {
-    greetingIndex ++;
+  if (arrayIndex < 4) {
+    arrayIndex ++;
   } else {
-    greetingIndex = 0;
+    arrayIndex = 0;
   }
 
-  // This
-  if (greetingIndex == 0) {
+  // These if statements play the sound clips
+  if (arrayIndex == 0) {
     englishClip.play();
   }
 
-  if (greetingIndex >= 5) {
-    greetingIndex = 1;
+  if (arrayIndex >= 5) {
+    arrayIndex = 1;
   }
 }
 
