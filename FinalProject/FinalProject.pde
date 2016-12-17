@@ -3,22 +3,27 @@ import processing.sound.*; // Importing the Processing Sound Library
 
 RFont font;
 String[] greeting = {"Hello", "Bonjour", "Hola", "Buon Giorno", "Guten Tag"};
-String[] food = {"Poutine", "Ratatouille", "Paella", "Bruschetta", "Spätzle"};
 String[] country = {"Canada", "France", "Spain", "Italy", "Germany"};
 int arrayIndex = 0;
 
 // SoundFile variables
 SoundFile englishClip;
-/*
 SoundFile frenchClip;
- SoundFile spanishClip;
- SoundFile italianClip;
- SSoundFile germanClip; */
+SoundFile spanishClip;
+SoundFile italianClip;
+SoundFile germanClip;
+
+// Variables for amplitude visualization
+float scale = 5;
+float smooth_factor = 0.25;
+float sum; 
+Amplitude engViz;
 
 float segmentLength = random(1, 6);
 
 void setup() {
-  size(1200, 600);  
+  size(1000, 600);
+  pixelDensity(2);
 
   noStroke();
 
@@ -33,36 +38,30 @@ void setup() {
   println("segmentLength: " + segmentLength);
 
   englishClip = new SoundFile(this, "hello.mp3");
-  /*
-  frenchClip = new SoundFile(this, "bonjour.mp3");
-   spanishClip = new SoundFile(this, "hola.mp3");
-   italianClip = new SoundFile(this, "buongiorno.mp3");
-   germanClip = new SoundFile(this, "gutentag.mp3");
-   */
+  frenchClip = new SoundFile(this, "bonjour.wav");
+  spanishClip = new SoundFile(this, "hola.wav");
+  italianClip = new SoundFile(this, "buongiorno.wav");
+  germanClip = new SoundFile(this, "gutentag.wav");
 }
 
 
 void draw() {
-  if (keyPressed == true) {
-    background(0);
-  } else {
-    background(255);
-  }
+  background(255);
 
-  translate(width/2, height/2); // Translate the loaded outlined text to a specific position
+  translate(width/2, height/2 + 25); // Translate the loaded outlined text to a specific position
 
   if (arrayIndex < 5) {
 
-    // FOOD --------------------------------------------------------------------------
+    // COUNTRY --------------------------------------------------------------------------
 
-    if (key == 'a' || key == 'A') {
+    if (key == 'c' || key == 'C') {
 
-      RGroup foodGroup; // Creates new RGroup to hold objects in it
-      foodGroup = font.toGroup(food[arrayIndex]); // RGroup will hold font and bring the words in the greeting array into the group
-      foodGroup = foodGroup.toPolygonGroup(); // Polygons are creatted from greetingGroup
-      RPoint[] foodPoints = foodGroup.getPoints(); // Returns the points of the groups as an array
+      RGroup countryGroup; // Creates new RGroup to hold objects in it
+      countryGroup = font.toGroup(country[arrayIndex]); // RGroup will hold font and bring the words in the country array into the group
+      countryGroup = countryGroup.toPolygonGroup(); // Polygons are created from countryGroup
+      RPoint[] countryPoints = countryGroup.getPoints(); // Returns the points of the groups as an array
 
-      for (int i = 0; i < foodPoints.length; i++) {
+      for (int i = 0; i < countryPoints.length; i++) {
         float rectWidth1 = random(1, 5);
         float rectWidth2 = random(1, 5);
         float rectWidth3 = random(1, 5);
@@ -84,7 +83,7 @@ void draw() {
           if (arrayIndex == 4) { // Germany
             fill(0); // Black
           }
-          rect(foodPoints[i].x, foodPoints[i].y, rectWidth1, rectWidth1);
+          rect(countryPoints[i].x, countryPoints[i].y, rectWidth1, rectWidth1);
         }
 
         if (i % 2 ==0) {
@@ -105,7 +104,7 @@ void draw() {
             fill(221, 0, 0); // Red
           }
 
-          rect(foodPoints[i].x, foodPoints[i].y, rectWidth2, rectWidth2);
+          rect(countryPoints[i].x, countryPoints[i].y, rectWidth2, rectWidth2);
         }
 
         if (i % 3 == 0) { 
@@ -126,7 +125,7 @@ void draw() {
             fill(255, 206, 0); // Yellow
           }
 
-          rect(foodPoints[i].x, foodPoints[i].y, rectWidth1, rectWidth1);
+          rect(countryPoints[i].x, countryPoints[i].y, rectWidth1, rectWidth1);
         }
       }
     } 
@@ -134,9 +133,10 @@ void draw() {
     // GREETINGS --------------------------------------------------------------------------
 
     else {
+
       RGroup greetingGroup; // Creates new RGroup to hold objects in it
       greetingGroup = font.toGroup(greeting[arrayIndex]); // RGroup will hold font and bring the words in the greeting array into the group
-      greetingGroup = greetingGroup.toPolygonGroup(); // Polygons are creatted from greetingGroup
+      greetingGroup = greetingGroup.toPolygonGroup(); // Polygons are created from greetingGroup
       RPoint[] wordPoints = greetingGroup.getPoints(); // Returns the points of the groups as an array
 
       for (int i = 0; i < wordPoints.length; i++ ) {
@@ -214,6 +214,7 @@ void draw() {
 
 // This mouseClicked function cycles the words in the greeting array
 void mouseClicked() {
+  
   if (arrayIndex < 4) {
     arrayIndex ++;
   } else {
@@ -221,19 +222,20 @@ void mouseClicked() {
   }
 
   // These if statements play the sound clips
-  if (arrayIndex == 0) {
+  if (arrayIndex == 0) { // Canada
     englishClip.play();
   }
-
-  if (arrayIndex >= 5) {
-    arrayIndex = 1;
+  if (arrayIndex == 1) { // France
+    frenchClip.play();
   }
+  if (arrayIndex == 2) { // Spain
+    spanishClip.play();
+  }
+  if (arrayIndex == 3) { // Italy
+    italianClip.play();
+  }
+  if (arrayIndex == 4) { // Germany
+    germanClip.play();
+  } 
+  
 }
-
-/*void keyPressed() {
- if (key == 'a' || key == 'A'){
- background(0);
- } else {
- background(255);
- }
- } */
