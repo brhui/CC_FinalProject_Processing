@@ -339,20 +339,10 @@ void keyPressed() {
 
   // Press S to stop playing
   if (key == 's' || key == 'S') {
-    if (arrayIndex == 0) { // Canada
-      CanadaAnthem.stop();
-    }
-    if (arrayIndex == 1) { // France
-      FranceAnthem.stop();
-    }
-    if (arrayIndex == 2) { // Spain
-      SpainAnthem.stop();
-    }
-    if (arrayIndex == 3) { // Italy
-      ItalyAnthem.stop();
-    }
-    if (arrayIndex == 4) { // Germany
-      GermanyAnthem.stop();
-    }
+    CanadaAnthem.stop();
+    FranceAnthem.stop();
+    SpainAnthem.stop();
+    ItalyAnthem.stop();
+    GermanyAnthem.stop();
   }
 }
