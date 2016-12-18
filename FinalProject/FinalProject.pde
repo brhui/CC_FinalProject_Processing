@@ -3,7 +3,7 @@ import processing.sound.*; // Importing the Processing Sound Library
 
 RFont font;
 String[] greeting = {"Hello", "Bonjour", "Hola", "Buon Giorno", "Guten Tag"};
-String[] country = {"Canada", "France", "Spain", "Italy", "Germany"};
+String[] country = {"O Canada", "La Marseillaise", "Marcha Real", "Inno di Mameli", "Deutschlandlied"};
 int arrayIndex = 0;
 
 // SoundFile variables
@@ -13,11 +13,29 @@ SoundFile spanishClip;
 SoundFile italianClip;
 SoundFile germanClip;
 
+SoundFile CanadaAnthem;
+SoundFile FranceAnthem;
+SoundFile SpainAnthem;
+SoundFile ItalyAnthem;
+SoundFile GermanyAnthem;
+
+// Image Variables
+PImage CanadaFlag;
+PImage FranceFlag;
+PImage SpainFlag;
+PImage ItalyFlag;
+PImage GermanyFlag;
+
 // Variables for amplitude visualization
 float scale = 5;
-float smooth_factor = 0.25;
-float sum; 
+float smoothness = 0.25;
+float smoothVar; 
 Amplitude engViz;
+Amplitude freViz;
+Amplitude spaViz;
+Amplitude itaViz;
+Amplitude gerViz;
+
 
 float segmentLength = random(1, 6);
 
@@ -38,15 +56,72 @@ void setup() {
   println("segmentLength: " + segmentLength);
 
   englishClip = new SoundFile(this, "hello.mp3");
+  CanadaFlag = loadImage("CanadaFlag.jpg");
+  CanadaAnthem = new SoundFile(this, "CanadaAnthem.mp3");
+  //engViz = new Amplitude(this);
+  //engViz.input(englishClip);
+
   frenchClip = new SoundFile(this, "bonjour.wav");
+  FranceFlag = loadImage("FranceFlag.jpg");
+  FranceAnthem = new SoundFile(this, "FranceAnthem.mp3");
+  //freViz = new Amplitude(this);
+  //freViz.input(frenchClip);
+
   spanishClip = new SoundFile(this, "hola.wav");
+  SpainFlag = loadImage("SpainFlag.jpg");
+  SpainAnthem = new SoundFile(this, "SpainAnthem.mp3");
+  //spaViz = new Amplitude(this);
+  //spaViz.input(spanishClip);
+
   italianClip = new SoundFile(this, "buongiorno.wav");
+  ItalyFlag = loadImage("ItalyFlag.jpg");
+  ItalyAnthem = new SoundFile(this, "ItalyAnthem.mp3");
+  //itaViz = new Amplitude(this);
+  //itaViz.input(italianClip);
+
   germanClip = new SoundFile(this, "gutentag.wav");
+  GermanyFlag = loadImage("GermanyFlag.jpg");
+  GermanyAnthem = new SoundFile(this, "GermanyAnthem.mp3");
+  //gerViz = new Amplitude(this);
+  //gerViz.input(germanClip);
+
+  // This is to play the sound clip on first load of the sketch.
+  if (arrayIndex == 0) { // Canada
+    englishClip.play();
+  }
 }
 
 
 void draw() {
   background(255);
+
+  pushMatrix();
+
+  translate(width/2, height/2);
+  rotate(radians(frameCount));
+
+  if (arrayIndex == 0) {
+    /* smoothVar += (engViz.analyze() - smoothVar) * smoothness;
+     float engVizScale = smoothVar * (height/2) * scale;
+     fill(engVizScale/0.4, engVizScale/2, engVizScale-50);
+     rect(width/2, height/2, engVizScale, engVizScale); */
+    image(CanadaFlag, 100, 100);
+  }
+
+  if  (arrayIndex == 1) {
+    image(FranceFlag, 150, 150);
+  }
+  if (arrayIndex == 2) {
+    image(SpainFlag, 100, 100);
+  }
+  if (arrayIndex == 3) {
+    image(ItalyFlag, 210, 210);
+  }
+  if (arrayIndex == 4) {
+    image(GermanyFlag, 200, 200);
+  }
+
+  popMatrix();
 
   translate(width/2, height/2 + 25); // Translate the loaded outlined text to a specific position
 
@@ -54,7 +129,7 @@ void draw() {
 
     // COUNTRY --------------------------------------------------------------------------
 
-    if (key == 'c' || key == 'C') {
+    if (key == 'a' || key == 'A') {
 
       RGroup countryGroup; // Creates new RGroup to hold objects in it
       countryGroup = font.toGroup(country[arrayIndex]); // RGroup will hold font and bring the words in the country array into the group
@@ -214,12 +289,14 @@ void draw() {
 
 // This mouseClicked function cycles the words in the greeting array
 void mouseClicked() {
-  
+
   if (arrayIndex < 4) {
     arrayIndex ++;
   } else {
     arrayIndex = 0;
   }
+
+  println(mouseX);
 
   // These if statements play the sound clips
   if (arrayIndex == 0) { // Canada
@@ -236,6 +313,46 @@ void mouseClicked() {
   }
   if (arrayIndex == 4) { // Germany
     germanClip.play();
-  } 
-  
+  }
+}
+
+void keyPressed() {
+
+  // Press A to start playing a country's anthem
+  if (key == 'a' || key == 'A') {
+    if (arrayIndex == 0) { // Canada
+      CanadaAnthem.play();
+    }
+    if (arrayIndex == 1) { // France
+      FranceAnthem.play();
+    }
+    if (arrayIndex == 2) { // Spain
+      SpainAnthem.play();
+    }
+    if (arrayIndex == 3) { // Italy
+      ItalyAnthem.play();
+    }
+    if (arrayIndex == 4) { // Germany
+      GermanyAnthem.play();
+    }
+  }
+
+  // Press S to stop playing
+  if (key == 's' || key == 'S') {
+    if (arrayIndex == 0) { // Canada
+      CanadaAnthem.stop();
+    }
+    if (arrayIndex == 1) { // France
+      FranceAnthem.stop();
+    }
+    if (arrayIndex == 2) { // Spain
+      SpainAnthem.stop();
+    }
+    if (arrayIndex == 3) { // Italy
+      ItalyAnthem.stop();
+    }
+    if (arrayIndex == 4) { // Germany
+      GermanyAnthem.stop();
+    }
+  }
 }
