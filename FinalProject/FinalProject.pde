@@ -153,8 +153,8 @@ class ParticleSystem {
 
   void runCanada() {
     for (int i = flags.size()-1; i >= 0; i--) {
-      Particle p = flags.get(i);
-      p.runCanada();
+      Particle SmallFlag = flags.get(i);
+      SmallFlag.runCanada();
     }
   }
 
