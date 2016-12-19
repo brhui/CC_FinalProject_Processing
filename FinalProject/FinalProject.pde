@@ -31,6 +31,18 @@ PImage SpainFlag;
 PImage ItalyFlag;
 PImage GermanyFlag;
 
+// Image variables for Backgrounds
+PImage CanadaPhoto;
+PImage CanadaCrowd;
+PImage FrancePhoto;
+PImage FranceCrowd;
+PImage SpainPhoto;
+PImage SpainCrowd;
+PImage ItalyPhoto;
+PImage ItalyCrowd;
+PImage GermanyPhoto;
+PImage GermanyCrowd;
+
 // Variables for amplitude visualization
 float scale = 5;
 float smoothness = 0.25;
@@ -51,7 +63,7 @@ PImage GerFlagSmall;
 
 void setup() {
   size(1000, 600);
-  pixelDensity(2); // This line is included so the pixels look better and not pixelated on high resolution displays
+  pixelDensity(2); // This line is included so the pixels look better and are not pixelated on high resolution displays
 
   noStroke();
 
@@ -103,6 +115,18 @@ void setup() {
   SpaFlagSmall = loadImage("SpainFlagSmall.jpg");
   ItaFlagSmall = loadImage("ItalyFlagSmall.jpg");
   GerFlagSmall = loadImage("GermanyFlagSmall.jpg");
+
+  //Background Images Load in
+  CanadaPhoto = loadImage("CanadaPhoto.jpg");
+  CanadaCrowd = loadImage("CanadaCrowd.jpg");
+  FrancePhoto = loadImage("FrancePhoto.jpg");
+  FranceCrowd = loadImage("FranceCrowd.jpg");
+  SpainPhoto = loadImage("SpainPhoto.jpg");
+  SpainCrowd = loadImage("SpainCrowd.jpg");
+  ItalyPhoto = loadImage("ItalyPhoto.jpg");
+  ItalyCrowd = loadImage("ItalyCrowd.jpg");
+  GermanyPhoto = loadImage("GermanyPhoto.jpg");
+  GermanyCrowd = loadImage("GermanyCrowd.jpg");
 
 
   // This is to play the sound clip on first load of the sketch.
@@ -231,6 +255,43 @@ class Particle {
 
 void draw() {
   background(255);
+
+  if (key == 'a' || key == 'A') {
+    if (arrayIndex == 0) {
+      image(CanadaCrowd, 0, 0);
+    }
+    if (arrayIndex == 1) {
+      image(FranceCrowd, 0, 0);
+    }
+    if (arrayIndex == 2) {
+      image(SpainCrowd, 0, 0);
+    }
+    if (arrayIndex == 3) {
+      image(ItalyCrowd, 0, 0);
+    }
+    if (arrayIndex == 4) {
+      image(GermanyCrowd, 0, 0);
+    }
+  } else {
+    if (arrayIndex == 0) {
+      image(CanadaPhoto, 0, 0);
+    }
+    if (arrayIndex == 1) {
+      image(FrancePhoto, 0, 0);
+    }
+    if (arrayIndex == 2) {
+      image(SpainPhoto, 0, 0);
+    }
+    if (arrayIndex == 3) {
+      image(ItalyPhoto, 0, 0);
+    }
+    if (arrayIndex == 4) {
+      image(GermanyPhoto, 0, 0);
+    }
+  }
+
+
+
 
   pushMatrix();
 
