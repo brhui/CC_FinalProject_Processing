@@ -113,8 +113,8 @@ class ParticleSystem {
   ArrayList<Particle> flags;
   PVector generate;
 
-  ParticleSystem(PVector position) {
-    generate = position.copy();
+  ParticleSystem(PVector pos1) {
+    generate = pos1.copy();
     flags = new ArrayList<Particle>();
   }
 
@@ -124,8 +124,6 @@ class ParticleSystem {
 
   void runCanada() {
     for (int i = flags.size()-1; i >= 0; i--) {
-      translate(width/2, height/2);
-      rotate(radians(frameCount));
       Particle p = flags.get(i);
       p.runCanada();
     }
@@ -133,32 +131,24 @@ class ParticleSystem {
 
   void runFrance() {
     for (int i = flags.size()-1; i >= 0; i--) {
-      translate(width/2, height/2);
-      rotate(radians(frameCount));
       Particle SmallFlag = flags.get(i);
       SmallFlag.runFrance();
     }
   }
   void runSpain() {
     for (int i = flags.size()-1; i >= 0; i--) {
-      translate(width/2, height/2);
-      rotate(radians(frameCount));
       Particle SmallFlag = flags.get(i);
       SmallFlag.runSpain();
     }
   }
   void runItaly() {
     for (int i = flags.size()-1; i >= 0; i--) {
-      translate(width/2, height/2);
-      rotate(radians(frameCount));
       Particle SmallFlag = flags.get(i);
       SmallFlag.runItaly();
     }
   }
   void runGermany() {
     for (int i = flags.size()-1; i >= 0; i--) {
-      translate(width/2, height/2);
-      rotate(radians(frameCount));
       Particle SmallFlag = flags.get(i);
       SmallFlag.runGermany();
     }
@@ -174,7 +164,7 @@ class Particle {
   PVector acc;
 
   Particle(PVector pos2) {
-    acc = new PVector(0, 0.03);
+    acc = new PVector(0, 0.009);
     vel = new PVector(random(-4, 4), random(-3, 0));
     pos = pos2.copy();
   }
@@ -208,18 +198,28 @@ class Particle {
 
   // Display Country Flags
   void displayCanada() {
+    translate(width/2, height/2);
+    rotate(radians(frameCount));
     image(CanFlagSmall, pos.x, pos.y);
   }
   void displayFrance() {
+    translate(width/2, height/2);
+    rotate(radians(frameCount));
     image(FreFlagSmall, pos.x, pos.y);
   }
   void displaySpain() {
+    translate(width/2, height/2);
+    rotate(radians(frameCount));
     image(SpaFlagSmall, pos.x, pos.y);
   }
   void displayItaly() {
+    translate(width/2, height/2);
+    rotate(radians(frameCount));
     image(ItaFlagSmall, pos.x, pos.y);
   }
   void displayGermany() {
+    translate(width/2, height/2);
+    rotate(radians(frameCount));
     image(GerFlagSmall, pos.x, pos.y);
   }
 }
