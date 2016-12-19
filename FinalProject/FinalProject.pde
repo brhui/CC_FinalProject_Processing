@@ -111,15 +111,15 @@ void setup() {
 
 class ParticleSystem {
   ArrayList<Particle> flags;
-  PVector generate;
+  PVector generateFlags;
 
   ParticleSystem(PVector pos1) {
-    generate = pos1.copy();
+    generateFlags = pos1.copy();
     flags = new ArrayList<Particle>();
   }
 
   void moreFlags() {
-    flags.add(new Particle(generate));
+    flags.add(new Particle(generateFlags));
   }
 
   void runCanada() {
@@ -198,28 +198,28 @@ class Particle {
 
   // Display Country Flags
   void displayCanada() {
-    translate(width/2, height/2);
-    rotate(radians(frameCount));
+    //translate(width/2, height/2);
+    //rotate(radians(frameCount));
     image(CanFlagSmall, pos.x, pos.y);
   }
   void displayFrance() {
-    translate(width/2, height/2);
-    rotate(radians(frameCount));
+    //translate(width/2, height/2);
+    //rotate(radians(frameCount));
     image(FreFlagSmall, pos.x, pos.y);
   }
   void displaySpain() {
-    translate(width/2, height/2);
-    rotate(radians(frameCount));
+    //translate(width/2, height/2);
+    //rotate(radians(frameCount));
     image(SpaFlagSmall, pos.x, pos.y);
   }
   void displayItaly() {
-    translate(width/2, height/2);
-    rotate(radians(frameCount));
+    //translate(width/2, height/2);
+    //rotate(radians(frameCount));
     image(ItaFlagSmall, pos.x, pos.y);
   }
   void displayGermany() {
-    translate(width/2, height/2);
-    rotate(radians(frameCount));
+    //translate(width/2, height/2);
+    //rotate(radians(frameCount));
     image(GerFlagSmall, pos.x, pos.y);
   }
 }
@@ -229,10 +229,10 @@ void draw() {
   background(255);
 
   pushMatrix();
-  
+
   //translate(width/2, height/2);
   //rotate(radians(frameCount));
-  
+
   if (arrayIndex == 0) {
     flagfall.moreFlags();
     flagfall.runCanada();
@@ -298,9 +298,9 @@ void draw() {
       RPoint[] countryPoints = countryGroup.getPoints(); // Returns the points of the groups as an array
 
       for (int i = 0; i < countryPoints.length; i++) {
-        float rectWidth1 = random(1, 5);
-        float rectWidth2 = random(1, 5);
-        float rectWidth3 = random(1, 5);
+        float rectWidth1 = random(1, 5.1);
+        float rectWidth2 = random(1, 4.61);
+        float rectWidth3 = random(1, 5.89);
 
         if (i % 1 == 0) { 
 
@@ -361,7 +361,7 @@ void draw() {
             fill(255, 206, 0); // Yellow
           }
 
-          rect(countryPoints[i].x, countryPoints[i].y, rectWidth1, rectWidth1);
+          rect(countryPoints[i].x, countryPoints[i].y, rectWidth3, rectWidth3);
         }
       }
     } 
