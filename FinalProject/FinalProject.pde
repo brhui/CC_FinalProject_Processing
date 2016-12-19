@@ -109,6 +109,9 @@ void setup() {
   }
 }
 
+
+// ParticleSystem Class
+
 class ParticleSystem {
   ArrayList<Particle> flags;
   PVector generateFlags;
@@ -155,8 +158,7 @@ class ParticleSystem {
   }
 }
 
-
-// A simple Particle class
+// Particle Class
 
 class Particle {
   PVector pos;
