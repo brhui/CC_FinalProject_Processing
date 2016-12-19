@@ -229,7 +229,10 @@ void draw() {
   background(255);
 
   pushMatrix();
-
+  
+  //translate(width/2, height/2);
+  //rotate(radians(frameCount));
+  
   if (arrayIndex == 0) {
     flagfall.moreFlags();
     flagfall.runCanada();
@@ -374,9 +377,9 @@ void draw() {
 
       for (int i = 0; i < wordPoints.length; i++ ) {
 
-        float circWidth1 = random(1, 5);
-        float circWidth2 = random(1, 5);
-        float circWidth3 = random(1, 5);
+        float circWidth1 = random(1, 5.1);
+        float circWidth2 = random(1, 3.9);
+        float circWidth3 = random(1, 4.67);
 
         if (i % 1 == 0) { 
 
@@ -453,8 +456,6 @@ void mouseClicked() {
   } else {
     arrayIndex = 0;
   }
-
-  println(mouseX);
 
   // These if statements play the sound clips
   if (arrayIndex == 0) { // Canada
