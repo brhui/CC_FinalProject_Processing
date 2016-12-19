@@ -97,7 +97,7 @@ void setup() {
   //gerViz = new Amplitude(this);
   //gerViz.input(germanClip);
 
-  flagfall = new ParticleSystem(new PVector(width/2, -50));
+  flagfall = new ParticleSystem(new PVector(width/2, 650));
   CanFlagSmall = loadImage("CanadaFlagSmall.jpg");
   FreFlagSmall = loadImage("FranceFlagSmall.jpg");
   SpaFlagSmall = loadImage("SpainFlagSmall.jpg");
@@ -168,7 +168,7 @@ class Particle {
   PVector acc;
 
   Particle(PVector pos2) {
-    acc = new PVector(0, 0.009);
+    acc = new PVector(0, -0.009);
     vel = new PVector(random(-4, 4), random(-3, 0));
     pos = pos2.copy();
   }
