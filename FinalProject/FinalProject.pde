@@ -1,25 +1,30 @@
 import geomerative.*; // Importing the Geomerative Library
 import processing.sound.*; // Importing the Processing Sound Library
 
+// Variables for Geomerative Library
 RFont font;
+float segmentLength = random(1, 6);
+
+// Variables for Arrays
 String[] greeting = {"Hello", "Bonjour", "Hola", "Buon Giorno", "Guten Tag"};
 String[] country = {"O Canada", "La Marseillaise", "Marcha Real", "Inno di Mameli", "Deutschlandlied"};
 int arrayIndex = 0;
 
-// SoundFile variables
+// SoundFile variables for voice lines
 SoundFile englishClip;
 SoundFile frenchClip;
 SoundFile spanishClip;
 SoundFile italianClip;
 SoundFile germanClip;
 
+// SoundFile variables for national anthems
 SoundFile CanadaAnthem;
 SoundFile FranceAnthem;
 SoundFile SpainAnthem;
 SoundFile ItalyAnthem;
 SoundFile GermanyAnthem;
 
-// Image Variables
+// Image variables for flags
 PImage CanadaFlag;
 PImage FranceFlag;
 PImage SpainFlag;
@@ -36,12 +41,17 @@ Amplitude spaViz;
 Amplitude itaViz;
 Amplitude gerViz;
 
-
-float segmentLength = random(1, 6);
+// Variables for Flag particle system
+ParticleSystem flagfall;
+PImage CanFlagSmall;
+PImage FreFlagSmall;
+PImage SpaFlagSmall;
+PImage ItaFlagSmall;
+PImage GerFlagSmall;
 
 void setup() {
   size(1000, 600);
-  pixelDensity(2);
+  pixelDensity(2); // This line is included so the pixels look better and not pixelated on high resolution displays
 
   noStroke();
 
@@ -85,9 +95,132 @@ void setup() {
   //gerViz = new Amplitude(this);
   //gerViz.input(germanClip);
 
+  flagfall = new ParticleSystem(new PVector(width/2, -50));
+  CanFlagSmall = loadImage("CanadaFlagSmall.jpg");
+  FreFlagSmall = loadImage("FranceFlagSmall.jpg");
+  SpaFlagSmall = loadImage("SpainFlagSmall.jpg");
+  ItaFlagSmall = loadImage("ItalyFlagSmall.jpg");
+  GerFlagSmall = loadImage("GermanyFlagSmall.jpg");
+
+
   // This is to play the sound clip on first load of the sketch.
   if (arrayIndex == 0) { // Canada
     englishClip.play();
+  }
+}
+
+class ParticleSystem {
+  ArrayList<Particle> flags;
+  PVector generate;
+
+  ParticleSystem(PVector position) {
+    generate = position.copy();
+    flags = new ArrayList<Particle>();
+  }
+
+  void moreFlags() {
+    flags.add(new Particle(generate));
+  }
+
+  void runCanada() {
+    for (int i = flags.size()-1; i >= 0; i--) {
+      translate(width/2, height/2);
+      rotate(radians(frameCount));
+      Particle p = flags.get(i);
+      p.runCanada();
+    }
+  }
+
+  void runFrance() {
+    for (int i = flags.size()-1; i >= 0; i--) {
+      translate(width/2, height/2);
+      rotate(radians(frameCount));
+      Particle SmallFlag = flags.get(i);
+      SmallFlag.runFrance();
+    }
+  }
+  void runSpain() {
+    for (int i = flags.size()-1; i >= 0; i--) {
+      translate(width/2, height/2);
+      rotate(radians(frameCount));
+      Particle SmallFlag = flags.get(i);
+      SmallFlag.runSpain();
+    }
+  }
+  void runItaly() {
+    for (int i = flags.size()-1; i >= 0; i--) {
+      translate(width/2, height/2);
+      rotate(radians(frameCount));
+      Particle SmallFlag = flags.get(i);
+      SmallFlag.runItaly();
+    }
+  }
+  void runGermany() {
+    for (int i = flags.size()-1; i >= 0; i--) {
+      translate(width/2, height/2);
+      rotate(radians(frameCount));
+      Particle SmallFlag = flags.get(i);
+      SmallFlag.runGermany();
+    }
+  }
+}
+
+
+// A simple Particle class
+
+class Particle {
+  PVector pos;
+  PVector vel;
+  PVector acc;
+
+  Particle(PVector pos2) {
+    acc = new PVector(0, 0.03);
+    vel = new PVector(random(-4, 4), random(-3, 0));
+    pos = pos2.copy();
+  }
+
+  // Run Method for countries
+  void runCanada() {
+    update();
+    displayCanada();
+  }
+  void runFrance() {
+    update();
+    displayFrance();
+  }
+  void runSpain() {
+    update();
+    displaySpain();
+  }
+  void runItaly() {
+    update();
+    displayItaly();
+  }
+  void runGermany() {
+    update();
+    displayGermany();
+  }
+
+  void update() {
+    vel.add(acc);
+    pos.add(vel);
+  }
+
+  // Display Country Flags
+  void displayCanada() {
+    image(CanFlagSmall, pos.x, pos.y);
+  }
+  void displayFrance() {
+    image(FreFlagSmall, pos.x, pos.y);
+  }
+  void displaySpain() {
+    image(SpaFlagSmall, pos.x, pos.y);
+  }
+  void displayItaly() {
+    image(ItaFlagSmall, pos.x, pos.y);
+  }
+  void displayGermany() {
+    image(GerFlagSmall, pos.x, pos.y);
   }
 }
 
@@ -97,31 +230,56 @@ void draw() {
 
   pushMatrix();
 
-  translate(width/2, height/2);
-  rotate(radians(frameCount));
-
   if (arrayIndex == 0) {
-    /* smoothVar += (engViz.analyze() - smoothVar) * smoothness;
-     float engVizScale = smoothVar * (height/2) * scale;
-     fill(engVizScale/0.4, engVizScale/2, engVizScale-50);
-     rect(width/2, height/2, engVizScale, engVizScale); */
-    image(CanadaFlag, 100, 100);
+    flagfall.moreFlags();
+    flagfall.runCanada();
   }
-
-  if  (arrayIndex == 1) {
-    image(FranceFlag, 150, 150);
+  if (arrayIndex == 1) {
+    flagfall.moreFlags();
+    flagfall.runFrance();
   }
   if (arrayIndex == 2) {
-    image(SpainFlag, 100, 100);
+    flagfall.moreFlags();
+    flagfall.runSpain();
   }
   if (arrayIndex == 3) {
-    image(ItalyFlag, 210, 210);
+    flagfall.moreFlags();
+    flagfall.runItaly();
   }
   if (arrayIndex == 4) {
-    image(GermanyFlag, 200, 200);
+    flagfall.moreFlags();
+    flagfall.runGermany();
   }
 
   popMatrix();
+  /*
+  pushMatrix();
+   
+   translate(width/2, height/2);
+   rotate(radians(frameCount));
+   
+   if (arrayIndex == 0) {
+   // smoothVar += (engViz.analyze() - smoothVar) * smoothness;
+   // float engVizScale = smoothVar * (height/2) * scale;
+   // fill(engVizScale/0.4, engVizScale/2, engVizScale-50);
+   // rect(width/2, height/2, engVizScale, engVizScale);
+   image(CanadaFlag, 100, 100);
+   }
+   
+   if  (arrayIndex == 1) {
+   image(FranceFlag, 150, 150);
+   }
+   if (arrayIndex == 2) {
+   image(SpainFlag, 100, 100);
+   }
+   if (arrayIndex == 3) {
+   image(ItalyFlag, 210, 210);
+   }
+   if (arrayIndex == 4) {
+   image(GermanyFlag, 200, 200);
+   }
+   
+   popMatrix(); */
 
   translate(width/2, height/2 + 25); // Translate the loaded outlined text to a specific position
 
@@ -337,7 +495,7 @@ void keyPressed() {
     }
   }
 
-  // Press S to stop playing
+  // Press S to stop playing any of the anthems
   if (key == 's' || key == 'S') {
     CanadaAnthem.stop();
     FranceAnthem.stop();
