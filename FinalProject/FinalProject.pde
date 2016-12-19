@@ -58,7 +58,9 @@ void setup() {
   rectMode(CENTER);
 
   RG.init(this); // Initilizes the Geomerative Library
-  font = new RFont("data/OpenSans-Bold.ttf", 100, RFont.CENTER); // Loads the font using the Geomerative Library, font size 100, center aligned.
+  font = new RFont("data/olivier_demo.ttf", 150, RFont.CENTER); // Loads the font using the Geomerative Library, font size 150, center aligned.
+  // font = new RFont("data/Pacifico.ttf", 150, RFont.CENTER);
+  // font = new RFont("data/OpenSans-Bold.ttf", 150, RFont.CENTER);
 
   RCommand.setSegmentLength(segmentLength); // Get the points on the curve's shape and sets distance between them
   RCommand.setSegmentator(RCommand.UNIFORMLENGTH); // Sets segmentator style and sets the style (uniform length between segments)
@@ -300,9 +302,9 @@ void draw() {
       RPoint[] countryPoints = countryGroup.getPoints(); // Returns the points of the groups as an array
 
       for (int i = 0; i < countryPoints.length; i++) {
-        float rectWidth1 = random(1, 5.1);
-        float rectWidth2 = random(1, 4.61);
-        float rectWidth3 = random(1, 5.89);
+        float rectWidth1 = random(1, 6.1);
+        float rectWidth2 = random(1, 5.61);
+        float rectWidth3 = random(1, 7.89);
 
         if (i % 1 == 0) { 
 
@@ -379,9 +381,9 @@ void draw() {
 
       for (int i = 0; i < wordPoints.length; i++ ) {
 
-        float circWidth1 = random(1, 5.1);
-        float circWidth2 = random(1, 3.9);
-        float circWidth3 = random(1, 4.67);
+        float circWidth1 = random(1, 7.1);
+        float circWidth2 = random(1, 6.9);
+        float circWidth3 = random(1, 7.67);
 
         if (i % 1 == 0) { 
 
@@ -443,7 +445,7 @@ void draw() {
             fill(255, 206, 0); // Yellow
           }
 
-          ellipse(wordPoints[i].x, wordPoints[i].y, circWidth1, circWidth1);
+          ellipse(wordPoints[i].x, wordPoints[i].y, circWidth3, circWidth3);
         }
       }
     }
