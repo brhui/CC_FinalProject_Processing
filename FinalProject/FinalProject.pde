@@ -63,7 +63,8 @@ PImage GerFlagSmall;
 
 void setup() {
   size(1000, 600);
-  pixelDensity(2); // This line is included so the pixels look better and are not pixelated on high resolution displays
+  // pixelDensity(2); // This line is included so the pixels look better and are not pixelated on high resolution displays
+  // Please note that enabling pixelDensity will make the sketch run slower
 
   noStroke();
 
